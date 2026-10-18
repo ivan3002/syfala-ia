@@ -55,7 +55,7 @@ proc add_port { name dir {size 1} } {
 # -----------------------------------------------------------------------------
 switch $::rt::board {
 # -----------------------------------------------------------------------------
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 # -----------------------------------------------------------------------------
 set DDR        [add_intf_port "xilinx.com:interface:ddrx_rtl:1.0" DDR]
 set FIXED_IO   [add_intf_port "xilinx.com:display_processing_system7:fixedio_rtl:1.0" FIXED_IO]
@@ -108,7 +108,7 @@ set ip_list [list                       \
 ]
 
 switch $::rt::board {
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
     lappend ip_list "xilinx.com:ip:processing_system7:5.5"
 }
 GENESYS {
@@ -169,7 +169,7 @@ if {$::globals::clk_dynamic_reconfig} {
 }
 
 switch $::rt::board {
-    Z10 - Z20  {
+    Z10 - Z20 - PYNQ {
         set axi_mem_interconn [add_axi_interconnect "axi_mem_interconn" 1]
     }
     GENESYS {
@@ -250,7 +250,7 @@ set_property -dict [list CONFIG.CONST_VAL {0}] $GND
 
 switch $::rt::board {
 # -----------------------------------------------------------------------------
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 # -----------------------------------------------------------------------------
 # Change sys_clk frequency here.
 # Don"t forget to change the corresponding period in hls.tcl (not in master_zybo.xdc, this one is the board clk!)
@@ -327,7 +327,7 @@ set_property -dict [list                    \
 # -----------------------------------------------------------------------------
 
 switch $::rt::board {
-    Z10 - Z20 {
+    Z10 - Z20 - PYNQ {
         source $::Syfala::SOURCE_DIR/bd/ps/zybo_ps7.tcl
     }
     GENESYS {
@@ -425,7 +425,7 @@ connect "pins" rst_global/slowest_sync_clk          \
 # -----------------------------------------------------------------------------
 switch $::rt::board {
 # -----------------------------------------------------------------------------
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 # -----------------------------------------------------------------------------
 connect "intf_pins" processing_system7_0/S_AXI_HP0      \
         "intf_pins" axi_mem_interconn/M00_AXI
@@ -476,7 +476,7 @@ connect "intf_pins" axi_gpio_SW/S_AXI    "intf_pins" axi_periph_interconn/M02_AX
 
 switch $::rt::board {
 # -----------------------------------------------------------------------------
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 # -----------------------------------------------------------------------------
 connect "pins" $system_clock "pins" axi_mem_interconn/ACLK
 connect "pins" $system_clock "pins" axi_mem_interconn/M00_ACLK
@@ -551,7 +551,7 @@ if {$::rt::board == "GENESYS"} {
 # -----------------------------------------------------------------------------
 switch $::rt::board {
 # -----------------------------------------------------------------------------
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 # -----------------------------------------------------------------------------
 if $::globals::clk_dynamic_reconfig {
     assign_bd_address -offset "0x44A00000" -range "0x00010000"              \

@@ -6,7 +6,7 @@ set BOARD   [lindex $::argv 1]
 set TARGET  [lindex $::argv 2]
 
 switch $BOARD {
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
     set arch "32-bit"
     set domain_name "standalone_ps7_cortexa9_0"
     set proc_name "ps7_cortexa9_0"
@@ -52,7 +52,7 @@ platform generate -domains
 platform active $PLATFORM_NAME
 
 switch $BOARD {
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
     domain active "zynq_fsbl"
 }
 GENESYS {
@@ -139,7 +139,7 @@ foreach src $sources {
 }
 
 switch $BOARD {
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 importsources -name $APPLICATION_NAME                                       \
               -path $::Syfala::SOURCE_DIR/arm/baremetal/linkers/zybo        \
               -linker-script

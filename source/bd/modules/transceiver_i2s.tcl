@@ -50,6 +50,9 @@ switch $::rt::board {
     GENESYS {
         set ncodecs_max 16
     }
+    PYNQ {
+        set ncodecs_max 0
+    }
 }
 
 set multichannel_i      [expr $::rt::nchannels_i > 2]
@@ -176,7 +179,7 @@ connect "pins" mux_2to1_0/Sel             "pins" sw2/Dout
 # -----------------------------------------------------------------------------
 switch $::rt::board {
 # -----------------------------------------------------------------------------
-Z10 - Z20 {
+Z10 - Z20 - PYNQ {
 connect "intf_pins" processing_system7_0/IIC_0          \
         "intf_ports" IIC_0
 }

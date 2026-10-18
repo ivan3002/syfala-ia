@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 BOARD               ?= Z10
-BOARD_SUPPORTED     := Z10 Z20 Z35 Z100 GENESYS ZU19EG ZU15EG
+BOARD_SUPPORTED     := Z10 Z20 Z35 Z100 GENESYS ZU19EG ZU15EG PYNQ
 # -----------------------------------------------------------------------------
 ifneq ($(BOARD), $(filter $(BOARD), $(BOARD_SUPPORTED)))
     $(call static_error, Unsupported $(B)BOARD$(N) model: $(BOARD))
@@ -72,6 +72,26 @@ else ifeq ($(BOARD), GENESYS) # ---------------------------
     RESOURCE_FF_AVAILABLE       := 141120
     RESOURCE_LUT_AVAILABLE      := 70560
     RESOURCE_BRAM_AVAILABLE     := 432
+    RESOURCE_URAM_AVAILABLE     := 0
+else ifeq ($(BOARD), PYNQ) # -----------------------------
+   CONSTRAINT_FILE             := source/constraints/pynq-z2.xdc
+    LINKER_FILE                 := $(SOURCE_ARM_BAREMETAL_LINKER_ZYBO) #uses same zynq 7000 processor as zybo z720 so can reuse
+    BOARD_ID                    := pynq-z2
+    BOARD_PATH                  := pynq-z2
+    BOARD_CPP_ID                := 35
+    BOARD_PART                  := xc7z020clg400-1
+    BOARD_PART_FULL             := tul.com.tw:pynq-z2:part0:
+    BOARD_PART_REVISION         := A.0
+    BOARD_FAMILY                := ZYNQ_7000
+    BOARD_ARCH                  := 32-bit
+    BOARD_PROC                  := ps7_cortexa9_0
+    HLS_CLOCK_PERIOD            := 8.137634
+    AUDIO_CODEC_INTERNAL        := ADAU1761
+    AUDIO_CODEC_EXTERNAL_MAX    := 0
+    RESOURCE_DSP_AVAILABLE      := 220
+    RESOURCE_FF_AVAILABLE       := 106400
+    RESOURCE_LUT_AVAILABLE      := 53200
+    RESOURCE_BRAM_AVAILABLE     := 280
     RESOURCE_URAM_AVAILABLE     := 0
 else ifeq ($(BOARD), ZU19EG) # ---------------------------
     CONSTRAINT_FILE             ?= 0
