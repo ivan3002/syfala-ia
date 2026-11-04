@@ -157,6 +157,13 @@ connect "ports" internal_codec_bclk  "pins" i2s_transceiver_0/sclk
 connect "ports" internal_codec_mclk  "pins" clk_wiz_I2S/clk_24Mhz
 
 switch $::rt::board {
+PYNQ {
+    connect "ports" internal_codec_sd_tx "pins" i2s_transceiver_0/sd_ch0_ch1_tx
+    connect "ports" internal_codec_sd_rx "pins" i2s_transceiver_0/sd_ch0_ch1_rx
+}
+}
+
+switch $::rt::board {
 Z10 - Z20 {
     connect "ports" internal_codec_ws_rx "pins" i2s_transceiver_0/ws
     connect "ports" internal_codec_out_mute "pins" vdd33/dout

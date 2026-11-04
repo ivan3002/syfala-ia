@@ -327,8 +327,11 @@ set_property -dict [list                    \
 # -----------------------------------------------------------------------------
 
 switch $::rt::board {
-    Z10 - Z20 - PYNQ {
+    Z10 - Z20 {
         source $::Syfala::SOURCE_DIR/bd/ps/zybo_ps7.tcl
+    }
+    PYNQ {
+        source $::Syfala::SOURCE_DIR/bd/ps/pynqz2_ps7.tcl
     }
     GENESYS {
         source $::Syfala::SOURCE_DIR/bd/ps/genesys_psu.tcl
