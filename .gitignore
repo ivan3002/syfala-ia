@@ -40,3 +40,4 @@ Cargo.lock
 tools/hls2csv/target
 .vscode
 compile_flags.txt
+NA/*
